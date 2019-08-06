@@ -3,10 +3,18 @@
     <h1>My Tasks</h1>
     <% @tasks.each do |t| %>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="customCheck1">
-        <label class="custom-control-label" for="customCheck1">
+        <%= link_to task_path(t) do %>
+          <% if t.completed%>
+            <i class='fas fa-check-square'></i>
+          <% else %>
+            <i class='fas fa-square'></i>
+          <% end %>
+        <% end %>
+
+        <label for="customCheck<%= t.id %>">
           <%= link_to t.title, task_path(t) %>
         </label>
+
         <%= link_to edit_task_path(t) do %>
           <i class="fa fa-pencil"> </i>
         <% end %>
@@ -15,6 +23,7 @@
               data: { confirm: "Are you sure?" } do %>
           <i class="fa fa-trash"> </i>
         <% end %>
+
       </div>
     <% end %>
     <hr>
